@@ -18,6 +18,7 @@ text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="388px" fill="#161b22" rx="15"/>
 <text x="15" y="30" class="ascii" font-size="16px">
+<<<<<<< HEAD
 <tspan x="15" y="30">:,`&quot;:;;:;^&apos;&quot;;I;,`&apos;,;:,&quot;``,::,&apos;^:</tspan>
 <tspan x="15" y="50">&quot;.(   : _,  n          1`-!.l  ,</tspan>
 <tspan x="15" y="70">;_,, ^I .;IQ    $$$$  r  ^   ?|:</tspan>
@@ -36,6 +37,26 @@ text, tspan {white-space: pre;}
 <tspan x="15" y="330">;       0  $     M            ?;</tspan>
 <tspan x="15" y="350">:u     $                      &gt;I</tspan>
 <tspan x="15" y="370">::. .  x+~f&apos;                  &quot;;</tspan>
+=======
+<tspan x="15" y="30"></tspan>
+<tspan x="15" y="50">           &apos;  itLmO0{</tspan>
+<tspan x="15" y="70">            &quot;&lt;%$$$$$&amp;,</tspan>
+<tspan x="15" y="90">           &apos;LfQd%*kh8I</tspan>
+<tspan x="15" y="110">          &apos;-zI-:w[+-OI</tspan>
+<tspan x="15" y="130">          &apos;_tkM~*MW#b+`</tspan>
+<tspan x="15" y="150">           [Ijkl[d$Wb}&apos;</tspan>
+<tspan x="15" y="170">           &quot;Il:~1XO%r^</tspan>
+<tspan x="15" y="190">            &apos; icLCft&gt;</tspan>
+<tspan x="15" y="210">          .&apos;|^ &apos;^^;Lv</tspan>
+<tspan x="15" y="230">          ^`|b/l`i0#n</tspan>
+<tspan x="15" y="250">         ,\} \@z|_Z$+</tspan>
+<tspan x="15" y="270">        &gt;/&gt;(. |h),rh&apos;</tspan>
+<tspan x="15" y="290">..     !MO-kCLcYt^tf</tspan>
+<tspan x="15" y="310">       r#qZmt[|.l-``</tspan>
+<tspan x="15" y="330">      :jCvOXl   .&lt;             .</tspan>
+<tspan x="15" y="350">     .*,  ,&quot;                   .</tspan>
+<tspan x="15" y="370">     .*,.]-</tspan>
+>>>>>>> a82ce5c59eff9b11a937dafcdc05c27a8f5e553d
 </text>
 <text x="330" y="30" fill="#c9d1d9"><tspan>dzakiudin@github -  </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="449.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
 <text x="330" y="50" fill="#c9d1d9"><tspan class="cc">. </tspan><tspan class="key">OS</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="573.8">................................................................................................................................................................................................................................................</tspan></text><rect x="701.4" y="37" width="269.6" height="22" fill="#161b22"/><text x="971" y="50" class="value" text-anchor="end">Windows 10, Android, Linux</text>
