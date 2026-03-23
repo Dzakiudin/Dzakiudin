@@ -188,10 +188,8 @@ def _image_bytes_from_sources(image_file: str, image_url: str) -> bytes:
 
 def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: bool) -> list[str]:
     try:
-        from PIL import Image  # type: ignore
-        from PIL import ImageFilter  # type: ignore
-        from PIL import ImageOps  # type: ignore
-    except Exception:
+        from PIL import Image, ImageFilter, ImageOps
+    except ImportError:
         return []
 
     if not image_bytes:
@@ -199,46 +197,49 @@ def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: b
 
     try:
         img = Image.open(io.BytesIO(image_bytes))
-        img = img.convert("L")
+        img = img.convert("L")  # Konversi ke Grayscale
     except Exception:
         return []
 
-    cols = max(10, int(cols))
-    rows = max(10, int(rows))
+    # 1. MENINGKATKAN KONTRAS & DETAIL
+    # Sangat penting untuk gambar stencil agar hitamnya benar-benar hitam dan putihnya bersih
+    img = ImageOps.autocontrast(img, cutoff=0.5) 
+    img = img.filter(ImageFilter.SHARPEN) # Mempertajam tepian karakter
 
+    # 2. PENYESUAIAN UKURAN (Resize)
+    # Gunakan Resampling LANCZOS untuk menjaga detail saat pengecilan ukuran
     w, h = img.size
-    if w <= 0 or h <= 0:
-        return []
+    aspect_ratio = h / w
+    # ASCII karakter biasanya lebih tinggi dari lebarnya (rasio ~1.6 - 2.0)
+    # Kita kalibrasi agar gambar tidak terlihat "gepeng"
+    target_h = int(cols * aspect_ratio * 0.55) 
+    img = img.resize((cols, target_h), Image.Resampling.LANCZOS)
 
-    min_side = min(w, h)
-    left = (w - min_side) // 2
-    top = (h - min_side) // 2
-    img = img.crop((left, top, left + min_side, top + min_side))
-
-    aspect_correction = 0.55
-    target_h = max(10, int(rows / aspect_correction))
-    img = img.resize((cols, target_h))
-    img = img.resize((cols, rows))
-
-    mode = (os.environ.get("PROFILE_ASCII_MODE") or "edge").strip().lower()
-    if mode == "edge":
-        img = img.filter(ImageFilter.FIND_EDGES)
-        img = ImageOps.autocontrast(img)
-        img = img.filter(ImageFilter.SHARPEN)
-        img = ImageOps.autocontrast(img)
+    # Pastikan jumlah baris sesuai dengan permintaan atau hasil resize
+    actual_rows = rows if rows > 10 else target_h
+    img = img.resize((cols, actual_rows), Image.Resampling.LANCZOS)
 
     pixels = list(img.getdata())
+    
+    # Invert jika background GitHub user adalah gelap tapi gambarnya putih (atau sebaliknya)
     if invert:
         pixels = [255 - p for p in pixels]
 
-    ramp = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+    # 3. RAMP KARAKTER YANG LEBIH HALUS
+    # Ramp ini diurutkan dari yang paling tipis ke yang paling padat untuk tekstur yang kaya
+    ramp = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+    if not invert:
+        ramp = ramp[::-1] # Balik urutan jika tidak di-invert
+        
     ramp_len = len(ramp) - 1
 
     lines: list[str] = []
-    for r in range(rows):
+    for r in range(actual_rows):
         row = pixels[r * cols : (r + 1) * cols]
+        # Mapping pixel (0-255) ke karakter di dalam ramp
         line_chars = [ramp[int((p / 255) * ramp_len)] for p in row]
         lines.append("".join(line_chars).rstrip())
+    
     return lines
 
 def _format_duration(start: dt.datetime, end: dt.datetime) -> str:
