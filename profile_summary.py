@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime as dt
 import base64
+import io
 import json
 import os
 import textwrap
@@ -160,6 +161,77 @@ def _file_image_data_uri(path: str) -> str:
     return f"data:{content_type};base64,{b64}"
 
 
+def _read_file_bytes(path: str) -> bytes:
+    with open(path, "rb") as f:
+        return f.read()
+
+
+def _fetch_url_bytes(url: str) -> bytes:
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "profile-readme-card"},
+        method="GET",
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return resp.read()
+
+
+def _image_bytes_from_sources(image_file: str, image_url: str) -> bytes:
+    if image_file and os.path.exists(image_file):
+        return _read_file_bytes(image_file)
+    if os.path.exists("download (1).jpg"):
+        return _read_file_bytes("download (1).jpg")
+    if image_url:
+        return _fetch_url_bytes(image_url)
+    return b""
+
+
+def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: bool) -> list[str]:
+    try:
+        from PIL import Image  # type: ignore
+    except Exception:
+        return []
+
+    if not image_bytes:
+        return []
+
+    try:
+        img = Image.open(io.BytesIO(image_bytes))
+        img = img.convert("L")
+    except Exception:
+        return []
+
+    cols = max(10, int(cols))
+    rows = max(10, int(rows))
+
+    w, h = img.size
+    if w <= 0 or h <= 0:
+        return []
+
+    min_side = min(w, h)
+    left = (w - min_side) // 2
+    top = (h - min_side) // 2
+    img = img.crop((left, top, left + min_side, top + min_side))
+
+    aspect_correction = 0.55
+    target_h = max(10, int(rows / aspect_correction))
+    img = img.resize((cols, target_h))
+    img = img.resize((cols, rows))
+
+    pixels = list(img.getdata())
+    if invert:
+        pixels = [255 - p for p in pixels]
+
+    ramp = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+    ramp_len = len(ramp) - 1
+
+    lines: list[str] = []
+    for r in range(rows):
+        row = pixels[r * cols : (r + 1) * cols]
+        line_chars = [ramp[int((p / 255) * ramp_len)] for p in row]
+        lines.append("".join(line_chars).rstrip())
+    return lines
+
 def _format_duration(start: dt.datetime, end: dt.datetime) -> str:
     days = max(0, (end - start).days)
     years = days // 365
@@ -255,6 +327,7 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
 
     image_file = os.environ.get("PROFILE_IMAGE_FILE") or ""
     image_url = os.environ.get("PROFILE_IMAGE_URL") or ""
+    left_mode = (os.environ.get("PROFILE_LEFT_MODE") or "image").strip().lower()
     image_data_uri = ""
     try:
         if image_file and os.path.exists(image_file):
@@ -265,6 +338,15 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             image_data_uri = _fetch_image_data_uri(image_url)
     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError):
         image_data_uri = ""
+
+    image_bytes = b""
+    try:
+        image_bytes = _image_bytes_from_sources(image_file, image_url)
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError, OSError):
+        image_bytes = b""
+
+    ascii_enabled = left_mode == "ascii"
+    ascii_invert = (os.environ.get("PROFILE_ASCII_INVERT") or "").strip().lower() in {"1", "true", "yes"}
 
     header_line = " - "
 
@@ -365,8 +447,19 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         stats_y = 330 + (20 * contact_count) + 30
     else:
         stats_y = 310
-    max_y = max(420, stats_y + 60)
-    height_px = max(450, int(max_y + 30))
+
+    right_bottom_y = stats_y + 60
+    height_px = max(360, int(right_bottom_y + 40))
+
+    ascii_font_size = 16
+    ascii_line_h = 20
+    ascii_y0 = 30
+    ascii_x0 = 15
+    ascii_cols = int((right_x - ascii_x0) / (ascii_font_size * 0.6))
+    ascii_rows = int((right_bottom_y - ascii_y0) / ascii_line_h) + 1
+    ascii_lines = (
+        _image_to_ascii_lines(image_bytes, cols=ascii_cols, rows=ascii_rows, invert=ascii_invert) if ascii_enabled else []
+    )
 
     lines = [
         "<?xml version='1.0' encoding='UTF-8'?>",
@@ -384,12 +477,19 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         ".addColor {fill: #3fb950;}",
         ".delColor {fill: #f85149;}",
         f".cc {{fill: {cc};}}",
+        f".ascii {{fill: {fg};}}",
         "text, tspan {white-space: pre;}",
         "</style>",
         f'<rect width="{width_px}px" height="{height_px}px" fill="{bg}" rx="15"/>',
     ]
 
-    if image_data_uri:
+    if ascii_lines:
+        lines.append(f'<text x="{ascii_x0}" y="{ascii_y0}" class="ascii" font-size="{ascii_font_size}px">')
+        for i, line in enumerate(ascii_lines):
+            y = ascii_y0 + i * ascii_line_h
+            lines.append(f'<tspan x="{ascii_x0}" y="{y}">{_escape_xml(line)}</tspan>')
+        lines.append("</text>")
+    elif image_data_uri:
         lines.extend(
             [
                 "<defs>",
@@ -399,15 +499,6 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
                 "</defs>",
                 f'<image x="20" y="45" width="300" height="300" href="{image_data_uri}" clip-path="url(#pfp_clip)" preserveAspectRatio="xMidYMid slice" />',
                 f'<circle cx="170" cy="195" r="150" fill="none" stroke="{cc}" stroke-width="2" opacity="0.35" />',
-                f'<text x="45" y="395" fill="{fg}">{_escape_xml(login)}</text>',
-                f'<text x="45" y="420" fill="{fg}">github.com/{_escape_xml(login.lower())}</text>',
-            ]
-        )
-    else:
-        lines.extend(
-            [
-                f'<text x="50" y="120" fill="{fg}">{_escape_xml(login)}</text>',
-                f'<text x="50" y="145" fill="{fg}">Set PROFILE_IMAGE_URL</text>',
             ]
         )
 

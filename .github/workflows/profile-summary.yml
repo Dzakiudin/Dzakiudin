@@ -20,11 +20,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip pillow
       - name: Generate SVGs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROFILE_IMAGE_FILE: download (1).jpg
+          PROFILE_IMAGE_FILE: saul.png
           PROFILE_IMAGE_URL: https://avatars.githubusercontent.com/${{ github.repository_owner }}?s=256
+          PROFILE_LEFT_MODE: ascii
         run: python profile_summary.py
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
