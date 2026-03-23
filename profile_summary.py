@@ -221,11 +221,21 @@ def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: b
     img = img.resize((cols, rows))
 
     mode = (os.environ.get("PROFILE_ASCII_MODE") or "edge").strip().lower()
+    if mode == "normal":
+        img = ImageOps.autocontrast(img)
     if mode == "edge":
         img = img.filter(ImageFilter.FIND_EDGES)
         img = ImageOps.autocontrast(img)
         img = img.filter(ImageFilter.SHARPEN)
         img = ImageOps.autocontrast(img)
+    if mode == "threshold":
+        img = ImageOps.autocontrast(img)
+        img = img.filter(ImageFilter.GaussianBlur(radius=1))
+        try:
+            thresh = int(os.environ.get("PROFILE_ASCII_THRESH") or "110")
+        except ValueError:
+            thresh = 110
+        img = img.point(lambda p: 255 if p > thresh else 0)
 
     pixels = list(img.getdata())
     if invert:
@@ -282,8 +292,8 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     width_px = 985
     font_size = 16
     char_w = font_size * 0.6
-    right_x = 330
-    right_pad = int(os.environ.get("PROFILE_RIGHT_PAD") or "14")
+    right_x = int(os.environ.get("PROFILE_RIGHT_X") or "310")
+    right_pad = int(os.environ.get("PROFILE_RIGHT_PAD") or "22")
     right_edge = width_px - right_pad
 
     if theme == "dark":
@@ -450,7 +460,7 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             ]
         )
 
-    top_y = int(os.environ.get("PROFILE_TOP_Y") or "30")
+    top_y = int(os.environ.get("PROFILE_TOP_Y") or "40")
     has_contact = bool(profile_email or profile_discord or profile_linkedin)
     if has_contact:
         contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord))
@@ -459,11 +469,10 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         stats_y = top_y + 280
 
     right_bottom_y = stats_y + 60
-    bottom_pad = int(os.environ.get("PROFILE_BOTTOM_PAD") or "18")
-    height_px = max(360, int(right_bottom_y + bottom_pad))
+    bottom_pad = int(os.environ.get("PROFILE_BOTTOM_PAD") or "10")
 
-    ascii_font_size = int(os.environ.get("PROFILE_ASCII_FONT_SIZE") or "16")
-    ascii_line_h = int(os.environ.get("PROFILE_ASCII_LINE_H") or "20")
+    ascii_font_size = int(os.environ.get("PROFILE_ASCII_FONT_SIZE") or "14")
+    ascii_line_h = int(os.environ.get("PROFILE_ASCII_LINE_H") or "16")
     ascii_y0 = top_y
     ascii_x0 = 15
     ascii_cols = int((right_x - ascii_x0) / (ascii_font_size * 0.6))
@@ -471,6 +480,10 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     ascii_lines = (
         _image_to_ascii_lines(image_bytes, cols=ascii_cols, rows=ascii_rows, invert=ascii_invert) if ascii_enabled else []
     )
+
+    ascii_bottom_y = ascii_y0 + (max(0, len(ascii_lines) - 1) * ascii_line_h)
+    content_bottom_y = max(right_bottom_y, ascii_bottom_y)
+    height_px = max(320, int(content_bottom_y + bottom_pad))
 
     lines = [
         "<?xml version='1.0' encoding='UTF-8'?>",
