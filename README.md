@@ -19,15 +19,13 @@
 </picture>
 
 ---
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Dzakiudin&style=for-the-badge" alt="Profile views" />
-</p>
-
 ## 💰 You can help me by Donating
 <p align="center">
   <a href="https://saweria.co/jakijeki">
     <img src="https://img.shields.io/badge/Saweria-FF7A00?style=for-the-badge&logoColor=white" alt="Saweria" />
   </a>
 </p>
-
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=Dzakiudin&style=for-the-badge" alt="Profile views" />
+</p>
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
