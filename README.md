@@ -25,7 +25,3 @@
     <img src="https://img.shields.io/badge/Sociabuzz-00B894?style=for-the-badge&logoColor=white" alt="Sociabuzz" />
   </a>
 </p>
-
-<p>
-  <img src="https://komarev.com/ghpvc/?username=Dzakiudin&style=for-the-badge" alt="Profile views" />
-</p>
