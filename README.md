@@ -28,7 +28,7 @@
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=Dzakiudin&style=for-the-badge" alt="Profile views" />
 </p>
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+
 ## 🌐 Socials:
 [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/U34ry82BmV)
 [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/jakijekijuki)
