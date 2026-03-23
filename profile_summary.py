@@ -283,7 +283,7 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     width_px = 985
     font_size = 16
     char_w = font_size * 0.6
-    right_x = 330
+    right_x = 380
     right_pad = int(os.environ.get("PROFILE_RIGHT_PAD") or "14")
     right_edge = width_px - right_pad
 
