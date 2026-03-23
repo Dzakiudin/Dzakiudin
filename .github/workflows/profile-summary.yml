@@ -29,8 +29,4 @@ jobs:
           PROFILE_IMAGE_URL: https://avatars.githubusercontent.com/${{ github.repository_owner }}?s=256
           PROFILE_LEFT_MODE: ascii
         run: python profile_summary.py
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update README card"
-          file_pattern: "*.svg"
+      # Auto-commit disabled - run locally to generate SVGs
