@@ -43,5 +43,5 @@ text, tspan {white-space: pre;}
 <text x="330" y="350" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Commits</tspan><tspan class="cc">: </tspan><tspan class="value">0</tspan><tspan class="cc"> | Followers: </tspan><tspan class="value">0</tspan></text>
 <text x="330" y="370" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">PRs</tspan><tspan class="cc">: </tspan><tspan class="value">0</tspan><tspan class="cc"> | Following: </tspan><tspan class="value">0</tspan></text>
 <text x="330" y="390" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Issues</tspan><tspan class="cc">: </tspan><tspan class="value">0</tspan><tspan class="cc"> | Reviews: </tspan><tspan class="value">0</tspan></text>
-<text x="330" y="410" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="value">520</tspan><tspan class="cc"> | Contribs (yr): </tspan><tspan class="value">0</tspan></text>
+<text x="330" y="410" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="value">519</tspan><tspan class="cc"> | Contribs (yr): </tspan><tspan class="value">0</tspan></text>
 </svg>
