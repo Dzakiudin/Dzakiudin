@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="538px" font-size="16px">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="388px" font-size="16px">
 <style>
 @font-face {
   src: local('Consolas'), local('Consolas Bold');
@@ -16,53 +16,26 @@
 .ascii {fill: #24292f;}
 text, tspan {white-space: pre;}
 </style>
-<rect width="985px" height="538px" fill="#ffffff" rx="15"/>
-<text x="15" y="30" class="ascii" font-size="8px">
+<rect width="985px" height="388px" fill="#ffffff" rx="15"/>
+<text x="15" y="30" class="ascii" font-size="16px">
 <tspan x="15" y="30"></tspan>
-<tspan x="15" y="41"></tspan>
-<tspan x="15" y="52">                                    ..          .</tspan>
-<tspan x="15" y="63">                                       &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</tspan>
-<tspan x="15" y="74">                           &lt;.      .-nQWWWWWWMWL~</tspan>
-<tspan x="15" y="85">                           l...  ICk8B@$$$$$$$$@8? .</tspan>
-<tspan x="15" y="96">                                &quot;*@$$@@@@@@@@@@@$k: .</tspan>
-<tspan x="15" y="107">                             +(  &amp;BBB@@$$$$$$@$@@$i</tspan>
-<tspan x="15" y="118">                            &quot;qb)h@$@BBB$BBBBB@B@$@i</tspan>
-<tspan x="15" y="129">                          : &lt;@@0Xko&amp;@$$$$$$$$%$$$@i  &apos;^</tspan>
-<tspan x="15" y="140">                         -)&apos;O$Zlif|&gt;_|q$Ov\/r-\k$$i  &quot;;</tspan>
-<tspan x="15" y="151">                         l,.@0: &gt;&gt;&lt;  &apos;q$r   lj]_%$i  ..</tspan>
-<tspan x="15" y="162">                        ._ +$| &lt;-fwL) 8$#z|}|J1c%Bl&apos;^</tspan>
-<tspan x="15" y="173">                         ~&lt;&gt;BvmaaW$&amp;i^WB$$&amp;WMMa&amp;@$[Q!</tspan>
-<tspan x="15" y="184">                        .i-i@|f$$$@X Z$$$$$$$$$$$*-#?</tspan>
-<tspan x="15" y="195">                         ``&quot;#&lt; OB%%d&apos;vOoYaBB@@BbB| J)</tspan>
-<tspan x="15" y="206">                           xq  ;a$$a  &apos;!~X@%@$$p%UXq_</tspan>
-<tspan x="15" y="217">                           h-~, maXt/|?(qW$$$$$%$80f&apos;</tspan>
-<tspan x="15" y="228">                           [ 0&gt;:k+`!uZCZaZc0hB@$ov,.</tspan>
-<tspan x="15" y="239">                             Y!,Q    ;li(cJ1p$$h!&quot;</tspan>
-<tspan x="15" y="250">                            ^~` l&quot;]vnxrnUbWq$B*fi .</tspan>
-<tspan x="15" y="261">                            I&quot;   &apos;\Z$$$$$$$$\?Jmp.</tspan>
-<tspan x="15" y="272">                            ~- .&apos; ^^{1\tvvc/ iw$b</tspan>
-<tspan x="15" y="283">                        Ii  [pl  .          laoBh;</tspan>
-<tspan x="15" y="294">                        &lt;&lt;. l&amp;w1&quot;  .&apos;&apos;&apos;&apos;  &apos;](p#@@} &apos;..</tspan>
-<tspan x="15" y="305">                        &apos;  . c$BL];     .:jMMq$$aI ...</tspan>
-<tspan x="15" y="316">                         ..  im$$&amp;Zt_I.&apos;&apos;n$$$$B$b</tspan>
-<tspan x="15" y="327">          &apos;            &apos;]JC_  ;X%$$$WJCC|Yh$@@@BX                .</tspan>
-<tspan x="15" y="338">      .   `           lcXaaL.. .x8%%Q\h*J]~z8@$$&quot;                .</tspan>
-<tspan x="15" y="349">   .. .               rC.`(}. .. x$&amp;f?l+-` &gt;p@$w`</tspan>
-<tspan x="15" y="360">                    .j1  &apos;hI . .. 0$8$X&gt;][~Ca@$- .</tspan>
-<tspan x="15" y="371">  .&apos;               ,|$c]&gt;t$\,     ^m$B$]_h)r$@&amp;&lt;                        .</tspan>
-<tspan x="15" y="382">  ^`              ,QB%$O+#$$0//\\/&gt;IM@8{&quot;|fi&amp;$Q</tspan>
-<tspan x="15" y="393">  &apos;              .n$@@Z. \*W@$$$$$Bx[%M&lt; .!;0$]</tspan>
-<tspan x="15" y="404">                 &lt;@B$$q)|)uLOzUhaWBQ rwr]^ ;(m</tspan>
-<tspan x="15" y="415">                 )B*#M8$$$8#bx`]!|c.  ^_Oc_  .&apos;                          .</tspan>
-<tspan x="15" y="426">                .C$hUJL%%b&amp;#h%~.   . .  Ybt&quot;.</tspan>
-<tspan x="15" y="437">               &apos;{%8$$$%@$Wo|][i+.&apos;.   ..&quot;c;.                             &apos;&quot;</tspan>
-<tspan x="15" y="448"> .           . rv~)JJf+JC*MMQ            &quot;^                              ^i</tspan>
-<tspan x="15" y="459"> `.         `-~a,        f``&apos;</tspan>
-<tspan x="15" y="470">            ;&lt;Jht:..... &quot;+                                                &apos;&apos;</tspan>
-<tspan x="15" y="481">              w@h!  &apos;~+.O, .                                              :,</tspan>
-<tspan x="15" y="492">         `    _w    lt!XB;</tspan>
-<tspan x="15" y="503">`^             Mp?.  `kB-                                                  .</tspan>
-<tspan x="15" y="514">..            `M$@J(ta0i                                                   .</tspan>
+<tspan x="15" y="50">             &apos;   ,&lt;{((({&quot;</tspan>
+<tspan x="15" y="70">             &apos;  [b8$$$$$p^</tspan>
+<tspan x="15" y="90">            &apos; jJO&amp;BBBB&amp;B$; .</tspan>
+<tspan x="15" y="110">            :ib??[&lt;Mv+|x8: &apos;</tspan>
+<tspan x="15" y="130">            &quot;-Jvkb&lt;%Wdaaa\I</tspan>
+<tspan x="15" y="150">            .[|+%b+rm$@$hu!</tspan>
+<tspan x="15" y="170">             ;_!\i{{Jm$&amp;xl</tspan>
+<tspan x="15" y="190">            . ;..[LZkqnp~</tspan>
+<tspan x="15" y="210">            ^ f1&apos; .`&quot;l(%c .</tspan>
+<tspan x="15" y="230">           .&gt;i&lt;akt&gt;&lt;&lt;hB$t .</tspan>
+<tspan x="15" y="250">           ~|x ^Y$Uv(f%W,</tspan>
+<tspan x="15" y="270"> .       ^Yf+0!:.xWu_)$z .</tspan>
+<tspan x="15" y="290">       .&apos;q@z)okp*czJl&gt;0!</tspan>
+<tspan x="15" y="310">        )$o%$aCi&lt;&gt; :vl</tspan>
+<tspan x="15" y="330">      ^{(\|{uni&apos;    ,^              .`</tspan>
+<tspan x="15" y="350">      ^m+  !-                        &apos;</tspan>
+<tspan x="15" y="370">.    . jC&gt;}0~ .</tspan>
 </text>
 <text x="380" y="30" fill="#24292f"><tspan>dzakiudin@github -  </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="399.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
 <text x="380" y="50" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">OS</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="523.8">................................................................................................................................................................................................................................................</tspan></text><rect x="701.4" y="37" width="269.6" height="22" fill="#ffffff"/><text x="971" y="50" class="value" text-anchor="end">Windows 10, Android, Linux</text>
@@ -77,20 +50,14 @@ text, tspan {white-space: pre;}
 <text x="380" y="230" class="cc">. </text>
 <text x="380" y="250" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Hobbies</tspan><tspan class="key">.</tspan><tspan class="key">Software</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="389.4">................................................................................................................................................................................................................................................</tspan></text><rect x="759.0" y="237" width="212.0" height="22" fill="#ffffff"/><text x="971" y="250" class="value" text-anchor="end">Web Dev, Open Source</text>
 <text x="380" y="270" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Hobbies</tspan><tspan class="key">.</tspan><tspan class="key">Hardware</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="389.4">................................................................................................................................................................................................................................................</tspan></text><rect x="845.4" y="257" width="125.6" height="22" fill="#ffffff"/><text x="971" y="270" class="value" text-anchor="end">PC Building</text>
-<text x="380" y="310" fill="#24292f"><tspan>- Contact </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="495.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
-<text x="380" y="330" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Email</tspan><tspan class="key">.</tspan><tspan class="key">Personal</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="408.6">................................................................................................................................................................................................................................................</tspan></text><rect x="749.4" y="317" width="221.6" height="22" fill="#ffffff"/><text x="971" y="330" class="value" text-anchor="end">dzakiudin07@gmail.com</text>
-<text x="380" y="350" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">LinkedIn</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="466.2">................................................................................................................................................................................................................................................</tspan></text><rect x="807.0" y="337" width="164.0" height="22" fill="#ffffff"/><text x="971" y="350" class="value" text-anchor="end">Ahmad Dzakiudin</text>
-<text x="380" y="370" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Discord</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="475.8">................................................................................................................................................................................................................................................</tspan></text><rect x="835.8" y="357" width="135.2" height="22" fill="#ffffff"/><text x="971" y="370" class="value" text-anchor="end">jakijukijeki</text>
-<text x="380" y="390" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Facebook</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="466.2">................................................................................................................................................................................................................................................</tspan></text><rect x="835.8" y="377" width="135.2" height="22" fill="#ffffff"/><text x="971" y="390" class="value" text-anchor="end">jakijekijuki</text>
-<text x="380" y="410" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Instagram</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="456.6">................................................................................................................................................................................................................................................</tspan></text><rect x="845.4" y="397" width="125.6" height="22" fill="#ffffff"/><text x="971" y="410" class="value" text-anchor="end">jakijekiiii</text>
-<text x="380" y="460" fill="#24292f"><tspan>- GitHub Stats </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="447.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
-<text x="380" y="480" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Repos</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="183.0">................................................................................................................................................................................................................................................</tspan></text><rect x="466.2" y="467" width="192.8" height="22" fill="#ffffff"/><text x="659" y="480" class="value" text-anchor="end">0 {Contributed: 0}</text>
-<text x="675" y="480" class="cc" text-anchor="middle">|</text>
-<text x="691" y="480" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Stars</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="203.2">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="467" width="29.6" height="22" fill="#ffffff"/><text x="971" y="480" class="value" text-anchor="end">0</text>
-<text x="380" y="500" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Commits</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="163.8">................................................................................................................................................................................................................................................</tspan></text><rect x="629.4" y="487" width="29.6" height="22" fill="#ffffff"/><text x="659" y="500" class="value" text-anchor="end">0</text>
-<text x="675" y="500" class="cc" text-anchor="middle">|</text>
-<text x="691" y="500" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Followers</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="164.8">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="487" width="29.6" height="22" fill="#ffffff"/><text x="971" y="500" class="value" text-anchor="end">0</text>
-<text x="380" y="520" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="106.2">................................................................................................................................................................................................................................................</tspan></text><rect x="610.2" y="507" width="48.8" height="22" fill="#ffffff"/><text x="659" y="520" class="value" text-anchor="end">654</text>
-<text x="675" y="520" class="cc" text-anchor="middle">|</text>
-<text x="691" y="520" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Contribs (yr)</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="126.4">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="507" width="29.6" height="22" fill="#ffffff"/><text x="971" y="520" class="value" text-anchor="end">0</text>
+<text x="380" y="310" fill="#24292f"><tspan>- GitHub Stats </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="447.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
+<text x="380" y="330" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Repos</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="183.0">................................................................................................................................................................................................................................................</tspan></text><rect x="466.2" y="317" width="192.8" height="22" fill="#ffffff"/><text x="659" y="330" class="value" text-anchor="end">0 {Contributed: 0}</text>
+<text x="675" y="330" class="cc" text-anchor="middle">|</text>
+<text x="691" y="330" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Stars</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="203.2">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="317" width="29.6" height="22" fill="#ffffff"/><text x="971" y="330" class="value" text-anchor="end">0</text>
+<text x="380" y="350" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Commits</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="163.8">................................................................................................................................................................................................................................................</tspan></text><rect x="629.4" y="337" width="29.6" height="22" fill="#ffffff"/><text x="659" y="350" class="value" text-anchor="end">0</text>
+<text x="675" y="350" class="cc" text-anchor="middle">|</text>
+<text x="691" y="350" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Followers</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="164.8">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="337" width="29.6" height="22" fill="#ffffff"/><text x="971" y="350" class="value" text-anchor="end">0</text>
+<text x="380" y="370" fill="#24292f"><tspan class="cc">. </tspan><tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="106.2">................................................................................................................................................................................................................................................</tspan></text><rect x="610.2" y="357" width="48.8" height="22" fill="#ffffff"/><text x="659" y="370" class="value" text-anchor="end">650</text>
+<text x="675" y="370" class="cc" text-anchor="middle">|</text>
+<text x="691" y="370" fill="#24292f"><tspan class="cc"></tspan><tspan class="key">Contribs (yr)</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="126.4">................................................................................................................................................................................................................................................</tspan></text><rect x="941.4" y="357" width="29.6" height="22" fill="#ffffff"/><text x="971" y="370" class="value" text-anchor="end">0</text>
 </svg>
