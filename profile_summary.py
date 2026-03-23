@@ -199,7 +199,11 @@ def _count_loc(root: str) -> int:
 
 def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     width_px = 985
-    height_px = 530
+    font_size = 16
+    char_w = font_size * 0.6
+    right_x = 330
+    right_pad = 6
+    right_edge = width_px - right_pad
 
     if theme == "dark":
         bg = "#161b22"
@@ -207,14 +211,12 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         key = "#ffa657"
         value = "#a5d6ff"
         cc = "#616e7f"
-        border = "#30363d"
     else:
         bg = "#ffffff"
         fg = "#24292f"
         key = "#bc4c00"
         value = "#0969da"
         cc = "#57606a"
-        border = "#d0d7de"
 
     now_dt = dt.datetime.now(dt.timezone.utc)
     created_at_raw = stats.get("created_at") or ""
@@ -244,6 +246,10 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     stars = _format_int(stats["stars"])
     commits_year = _format_int(stats["commits_year"])
     followers = _format_int(stats["followers"])
+    following = _format_int(stats["following"])
+    prs_year = _format_int(stats["prs_year"])
+    issues_year = _format_int(stats["issues_year"])
+    reviews_year = _format_int(stats["reviews_year"])
     contribs_year = _format_int(stats["contribs_year"])
     loc = _format_int(_count_loc(os.getcwd()))
 
@@ -260,8 +266,74 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError):
         image_data_uri = ""
 
-    header_line = " -———————————————————————————————————————————————-—-"
-    contact_line = " - Contact" + " -——————————————————————————————————————————————-—-"
+    header_line = " - "
+
+    def _split_key(key_text: str) -> list[str]:
+        return key_text.split(".") if "." in key_text else [key_text]
+
+    def _build_header_line(y: int, left_text: str) -> str:
+        left_text = f"{left_text} "
+        bar_px = max(0.0, (right_edge - right_x) - (len(left_text) * char_w))
+        bar = "—" * 120
+        return (
+            f'<text x="{right_x}" y="{y}" fill="{fg}">'
+            f'<tspan>{_escape_xml(left_text)}</tspan>'
+            f'<tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="{bar_px:.1f}">{_escape_xml(bar)}</tspan>'
+            f"</text>"
+        )
+
+    def _build_section_line(y: int, title: str) -> str:
+        left_text = f"{title} "
+        bar_px = max(0.0, (right_edge - right_x) - (len(left_text) * char_w))
+        bar = "—" * 120
+        return (
+            f'<text x="{right_x}" y="{y}" fill="{fg}">'
+            f'<tspan>{_escape_xml(left_text)}</tspan>'
+            f'<tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="{bar_px:.1f}">{_escape_xml(bar)}</tspan>'
+            f"</text>"
+        )
+
+    def _build_kv_line(y: int, key_text: str, val_text: str) -> str:
+        prefix = f". {key_text}: "
+        prefix_w = len(prefix) * char_w
+        dots_px = max(0.0, (right_edge - right_x) - prefix_w - (char_w * 1.0))
+        dots_text = "." * 240
+
+        parts = [f'<text x="{right_x}" y="{y}" fill="{fg}">', '<tspan class="cc">. </tspan>']
+        key_parts = _split_key(key_text)
+        for i, part in enumerate(key_parts):
+            parts.append(f'<tspan class="key">{_escape_xml(part)}</tspan>')
+            if i != len(key_parts) - 1:
+                parts.append('<tspan class="key">.</tspan>')
+        parts.append('<tspan class="cc">: </tspan>')
+        parts.append(
+            f'<tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="{dots_px:.1f}">{dots_text}</tspan>'
+        )
+        parts.append("</text>")
+
+        rect_pad = 10
+        value_w = len(val_text) * char_w
+        rect_w = value_w + rect_pad * 2
+        rect_x = max(float(right_x), float(right_edge) - rect_w)
+        rect_y = y - font_size + 3
+        rect_h = font_size + 6
+
+        return "".join(
+            parts
+            + [
+                f'<rect x="{rect_x:.1f}" y="{rect_y}" width="{rect_w:.1f}" height="{rect_h}" fill="{bg}"/>',
+                f'<text x="{right_edge}" y="{y}" class="value" text-anchor="end">{_escape_xml(val_text)}</text>',
+            ]
+        )
+
+    has_contact = bool(profile_email or profile_discord or profile_linkedin)
+    if has_contact:
+        contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord))
+        stats_y = 330 + (20 * contact_count) + 30
+    else:
+        stats_y = 310
+    max_y = max(420, stats_y + 100)
+    height_px = max(450, int(max_y + 30))
 
     lines = [
         "<?xml version='1.0' encoding='UTF-8'?>",
@@ -281,7 +353,7 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         f".cc {{fill: {cc};}}",
         "text, tspan {white-space: pre;}",
         "</style>",
-        f'<rect width="{width_px}px" height="{height_px}px" fill="{bg}" rx="15" stroke="{border}"/>',
+        f'<rect width="{width_px}px" height="{height_px}px" fill="{bg}" rx="15"/>',
     ]
 
     if image_data_uri:
@@ -289,13 +361,13 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             [
                 "<defs>",
                 '<clipPath id="pfp_clip">',
-                '<circle cx="170" cy="200" r="135" />',
+                '<circle cx="170" cy="195" r="150" />',
                 "</clipPath>",
                 "</defs>",
-                f'<image x="35" y="65" width="270" height="270" href="{image_data_uri}" clip-path="url(#pfp_clip)" preserveAspectRatio="xMidYMid slice" />',
-                f'<circle cx="170" cy="200" r="135" fill="none" stroke="{border}" stroke-width="2" />',
-                f'<text x="60" y="380" fill="{fg}">{_escape_xml(login)}</text>',
-                f'<text x="60" y="405" fill="{fg}">github.com/{_escape_xml(login.lower())}</text>',
+                f'<image x="20" y="45" width="300" height="300" href="{image_data_uri}" clip-path="url(#pfp_clip)" preserveAspectRatio="xMidYMid slice" />',
+                f'<circle cx="170" cy="195" r="150" fill="none" stroke="{cc}" stroke-width="2" opacity="0.35" />',
+                f'<text x="45" y="395" fill="{fg}">{_escape_xml(login)}</text>',
+                f'<text x="45" y="420" fill="{fg}">github.com/{_escape_xml(login.lower())}</text>',
             ]
         )
     else:
@@ -306,43 +378,71 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             ]
         )
 
-    lines.append(f'<text x="390" y="30" fill="{fg}">')
-    lines.append(f'<tspan x="390" y="30">{_escape_xml(login.lower())}@github</tspan>{_escape_xml(header_line)}')
-    lines.append(f'<tspan x="390" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">{_escape_xml(profile_os)}</tspan>')
-    lines.append(f'<tspan x="390" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ...................... </tspan><tspan class="value" id="age_data">{_escape_xml(uptime)}</tspan>')
-    lines.append(f'<tspan x="390" y="90" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">{_escape_xml(profile_host)}</tspan>')
-    lines.append(f'<tspan x="390" y="110" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ...... </tspan><tspan class="value">{_escape_xml(profile_kernel)}</tspan>')
-    lines.append(f'<tspan x="390" y="130" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................ </tspan><tspan class="value">{_escape_xml(profile_ide)}</tspan>')
-    lines.append(f'<tspan x="390" y="150" class="cc">. </tspan>')
-    lines.append(f'<tspan x="390" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">{_escape_xml(profile_lang_prog)}</tspan>')
-    lines.append(f'<tspan x="390" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">{_escape_xml(profile_lang_comp)}</tspan>')
-    lines.append(f'<tspan x="390" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ......................... </tspan><tspan class="value">{_escape_xml(profile_lang_real)}</tspan>')
-    lines.append(f'<tspan x="390" y="230" class="cc">. </tspan>')
-    lines.append(f'<tspan x="390" y="250" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Software</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">{_escape_xml(profile_hobby_soft)}</tspan>')
-    lines.append(f'<tspan x="390" y="270" class="cc">. </tspan><tspan class="key">Hobbies</tspan>.<tspan class="key">Hardware</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">{_escape_xml(profile_hobby_hw)}</tspan>')
+    lines.append(_build_header_line(30, f"{login.lower()}@github{header_line}"))
+    lines.append(_build_kv_line(50, "OS", profile_os))
+    lines.append(_build_kv_line(70, "Uptime", uptime))
+    lines.append(_build_kv_line(90, "Host", profile_host))
+    lines.append(_build_kv_line(110, "Kernel", profile_kernel))
+    lines.append(_build_kv_line(130, "IDE", profile_ide))
+    lines.append(f'<text x="{right_x}" y="150" class="cc">. </text>')
+    lines.append(_build_kv_line(170, "Languages.Programming", profile_lang_prog))
+    lines.append(_build_kv_line(190, "Languages.Computer", profile_lang_comp))
+    lines.append(_build_kv_line(210, "Languages.Real", profile_lang_real))
+    lines.append(f'<text x="{right_x}" y="230" class="cc">. </text>')
+    lines.append(_build_kv_line(250, "Hobbies.Software", profile_hobby_soft))
+    lines.append(_build_kv_line(270, "Hobbies.Hardware", profile_hobby_hw))
 
-    if profile_email or profile_discord or profile_linkedin:
-        lines.append(f'<tspan x="390" y="310">{_escape_xml(contact_line)}</tspan>')
+    if has_contact:
+        lines.append(_build_section_line(310, "- Contact"))
         y = 330
         if profile_email:
-            lines.append(f'<tspan x="390" y="{y}" class="cc">. </tspan><tspan class="key">Email</tspan>.<tspan class="key">Personal</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">{_escape_xml(profile_email)}</tspan>')
+            lines.append(_build_kv_line(y, "Email.Personal", profile_email))
             y += 20
         if profile_linkedin:
-            lines.append(f'<tspan x="390" y="{y}" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">{_escape_xml(profile_linkedin)}</tspan>')
+            lines.append(_build_kv_line(y, "LinkedIn", profile_linkedin))
             y += 20
         if profile_discord:
-            lines.append(f'<tspan x="390" y="{y}" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">{_escape_xml(profile_discord)}</tspan>')
+            lines.append(_build_kv_line(y, "Discord", profile_discord))
             y += 20
         stats_y = y + 30
-    else:
-        stats_y = 310
 
-    lines.append(f'<tspan x="390" y="{stats_y}">- GitHub Stats{_escape_xml(" -——————————————————————————————————————————————-—-")}</tspan>')
-    lines.append(f'<tspan x="390" y="{stats_y+20}" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc"> ....... </tspan><tspan class="value">{repos}</tspan> <tspan class="cc">{{Contributed: </tspan><tspan class="value">{contributed_repos_year}</tspan><tspan class="cc">}} | Stars: </tspan><tspan class="value">{stars}</tspan>')
-    lines.append(f'<tspan x="390" y="{stats_y+40}" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc"> ...... </tspan><tspan class="value">{commits_year}</tspan><tspan class="cc"> | Followers: </tspan><tspan class="value">{followers}</tspan>')
-    lines.append(f'<tspan x="390" y="{stats_y+60}" class="cc">. </tspan><tspan class="key">Lines of Code</tspan>:<tspan class="cc"> .. </tspan><tspan class="value">{loc}</tspan><tspan class="cc"> | Contribs (yr): </tspan><tspan class="value">{contribs_year}</tspan>')
+    lines.append(_build_section_line(stats_y, "- GitHub Stats"))
+    lines.append(
+        f'<text x="{right_x}" y="{stats_y+20}" fill="{fg}">'
+        f'<tspan class="cc">. </tspan>'
+        f'<tspan class="key">Repos</tspan><tspan class="cc">: </tspan><tspan class="value">{repos}</tspan>'
+        f'<tspan class="cc"> {{Contributed: </tspan><tspan class="value">{contributed_repos_year}</tspan><tspan class="cc">}} | Stars: </tspan><tspan class="value">{stars}</tspan>'
+        f"</text>"
+    )
+    lines.append(
+        f'<text x="{right_x}" y="{stats_y+40}" fill="{fg}">'
+        f'<tspan class="cc">. </tspan>'
+        f'<tspan class="key">Commits</tspan><tspan class="cc">: </tspan><tspan class="value">{commits_year}</tspan>'
+        f'<tspan class="cc"> | Followers: </tspan><tspan class="value">{followers}</tspan>'
+        f"</text>"
+    )
+    lines.append(
+        f'<text x="{right_x}" y="{stats_y+60}" fill="{fg}">'
+        f'<tspan class="cc">. </tspan>'
+        f'<tspan class="key">PRs</tspan><tspan class="cc">: </tspan><tspan class="value">{prs_year}</tspan>'
+        f'<tspan class="cc"> | Following: </tspan><tspan class="value">{following}</tspan>'
+        f"</text>"
+    )
+    lines.append(
+        f'<text x="{right_x}" y="{stats_y+80}" fill="{fg}">'
+        f'<tspan class="cc">. </tspan>'
+        f'<tspan class="key">Issues</tspan><tspan class="cc">: </tspan><tspan class="value">{issues_year}</tspan>'
+        f'<tspan class="cc"> | Reviews: </tspan><tspan class="value">{reviews_year}</tspan>'
+        f"</text>"
+    )
+    lines.append(
+        f'<text x="{right_x}" y="{stats_y+100}" fill="{fg}">'
+        f'<tspan class="cc">. </tspan>'
+        f'<tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="value">{loc}</tspan>'
+        f'<tspan class="cc"> | Contribs (yr): </tspan><tspan class="value">{contribs_year}</tspan>'
+        f"</text>"
+    )
 
-    lines.append("</text>")
     lines.append("</svg>")
     return "\n".join(lines)
 
