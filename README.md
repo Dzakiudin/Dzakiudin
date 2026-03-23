@@ -14,7 +14,7 @@
 
 --- 
 ## 💰 You can help me by Donating
-<p align="center">
+<p>
   <a href="https://saweria.co/jakijeki">
     <img src="https://img.shields.io/badge/Saweria-FF7A00?style=for-the-badge&logoColor=white" alt="Saweria" />
   </a>
