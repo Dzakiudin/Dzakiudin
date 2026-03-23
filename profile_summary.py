@@ -189,6 +189,8 @@ def _image_bytes_from_sources(image_file: str, image_url: str) -> bytes:
 def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: bool) -> list[str]:
     try:
         from PIL import Image  # type: ignore
+        from PIL import ImageFilter  # type: ignore
+        from PIL import ImageOps  # type: ignore
     except Exception:
         return []
 
@@ -217,6 +219,13 @@ def _image_to_ascii_lines(image_bytes: bytes, *, cols: int, rows: int, invert: b
     target_h = max(10, int(rows / aspect_correction))
     img = img.resize((cols, target_h))
     img = img.resize((cols, rows))
+
+    mode = (os.environ.get("PROFILE_ASCII_MODE") or "edge").strip().lower()
+    if mode == "edge":
+        img = img.filter(ImageFilter.FIND_EDGES)
+        img = ImageOps.autocontrast(img)
+        img = img.filter(ImageFilter.SHARPEN)
+        img = ImageOps.autocontrast(img)
 
     pixels = list(img.getdata())
     if invert:
@@ -274,7 +283,7 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     font_size = 16
     char_w = font_size * 0.6
     right_x = 330
-    right_pad = 6
+    right_pad = int(os.environ.get("PROFILE_RIGHT_PAD") or "14")
     right_edge = width_px - right_pad
 
     if theme == "dark":
@@ -441,22 +450,24 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             ]
         )
 
+    top_y = int(os.environ.get("PROFILE_TOP_Y") or "30")
     has_contact = bool(profile_email or profile_discord or profile_linkedin)
     if has_contact:
         contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord))
-        stats_y = 330 + (20 * contact_count) + 30
+        stats_y = top_y + 330 + (20 * contact_count)
     else:
-        stats_y = 310
+        stats_y = top_y + 280
 
     right_bottom_y = stats_y + 60
-    height_px = max(360, int(right_bottom_y + 40))
+    bottom_pad = int(os.environ.get("PROFILE_BOTTOM_PAD") or "18")
+    height_px = max(360, int(right_bottom_y + bottom_pad))
 
-    ascii_font_size = 16
-    ascii_line_h = 20
-    ascii_y0 = 30
+    ascii_font_size = int(os.environ.get("PROFILE_ASCII_FONT_SIZE") or "16")
+    ascii_line_h = int(os.environ.get("PROFILE_ASCII_LINE_H") or "20")
+    ascii_y0 = top_y
     ascii_x0 = 15
     ascii_cols = int((right_x - ascii_x0) / (ascii_font_size * 0.6))
-    ascii_rows = int((right_bottom_y - ascii_y0) / ascii_line_h) + 1
+    ascii_rows = max(10, int((right_bottom_y - ascii_y0) / ascii_line_h) + 1)
     ascii_lines = (
         _image_to_ascii_lines(image_bytes, cols=ascii_cols, rows=ascii_rows, invert=ascii_invert) if ascii_enabled else []
     )
@@ -502,23 +513,23 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             ]
         )
 
-    lines.append(_build_header_line(30, f"{login.lower()}@github{header_line}"))
-    lines.append(_build_kv_line(50, "OS", profile_os))
-    lines.append(_build_kv_line(70, "Uptime", uptime))
-    lines.append(_build_kv_line(90, "Host", profile_host))
-    lines.append(_build_kv_line(110, "Kernel", profile_kernel))
-    lines.append(_build_kv_line(130, "IDE", profile_ide))
-    lines.append(f'<text x="{right_x}" y="150" class="cc">. </text>')
-    lines.append(_build_kv_line(170, "Languages.Programming", profile_lang_prog))
-    lines.append(_build_kv_line(190, "Languages.Computer", profile_lang_comp))
-    lines.append(_build_kv_line(210, "Languages.Real", profile_lang_real))
-    lines.append(f'<text x="{right_x}" y="230" class="cc">. </text>')
-    lines.append(_build_kv_line(250, "Hobbies.Software", profile_hobby_soft))
-    lines.append(_build_kv_line(270, "Hobbies.Hardware", profile_hobby_hw))
+    lines.append(_build_header_line(top_y, f"{login.lower()}@github{header_line}"))
+    lines.append(_build_kv_line(top_y + 20, "OS", profile_os))
+    lines.append(_build_kv_line(top_y + 40, "Uptime", uptime))
+    lines.append(_build_kv_line(top_y + 60, "Host", profile_host))
+    lines.append(_build_kv_line(top_y + 80, "Kernel", profile_kernel))
+    lines.append(_build_kv_line(top_y + 100, "IDE", profile_ide))
+    lines.append(f'<text x="{right_x}" y="{top_y + 120}" class="cc">. </text>')
+    lines.append(_build_kv_line(top_y + 140, "Languages.Programming", profile_lang_prog))
+    lines.append(_build_kv_line(top_y + 160, "Languages.Computer", profile_lang_comp))
+    lines.append(_build_kv_line(top_y + 180, "Languages.Real", profile_lang_real))
+    lines.append(f'<text x="{right_x}" y="{top_y + 200}" class="cc">. </text>')
+    lines.append(_build_kv_line(top_y + 220, "Hobbies.Software", profile_hobby_soft))
+    lines.append(_build_kv_line(top_y + 240, "Hobbies.Hardware", profile_hobby_hw))
 
     if has_contact:
-        lines.append(_build_section_line(310, "- Contact"))
-        y = 330
+        lines.append(_build_section_line(top_y + 280, "- Contact"))
+        y = top_y + 300
         if profile_email:
             lines.append(_build_kv_line(y, "Email.Personal", profile_email))
             y += 20
