@@ -15,7 +15,7 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Dzakiudin&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=true&layout=compact" alt="Top languages" />
 </p>
 
-## 🐍 Contributions Snake
+## 🐍 Contributions
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake.svg" />
