@@ -322,6 +322,8 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     profile_email = os.environ.get("PROFILE_EMAIL") or ""
     profile_discord = os.environ.get("PROFILE_DISCORD") or ""
     profile_linkedin = os.environ.get("PROFILE_LINKEDIN") or ""
+    profile_facebook = os.environ.get("PROFILE_FACEBOOK") or ""
+    profile_instagram = os.environ.get("PROFILE_INSTAGRAM") or ""
 
     repos = _format_int(stats["repos"])
     contributed_repos_year = _format_int(stats.get("contributed_repos_year") or 0)
@@ -452,9 +454,9 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         )
 
     top_y = int(os.environ.get("PROFILE_TOP_Y") or "30")
-    has_contact = bool(profile_email or profile_discord or profile_linkedin)
+    has_contact = bool(profile_email or profile_discord or profile_linkedin or profile_facebook or profile_instagram)
     if has_contact:
-        contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord))
+        contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord)) + int(bool(profile_facebook)) + int(bool(profile_instagram))
         stats_y = top_y + 330 + (20 * contact_count)
     else:
         stats_y = top_y + 280
@@ -539,6 +541,12 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             y += 20
         if profile_discord:
             lines.append(_build_kv_line(y, "Discord", profile_discord))
+            y += 20
+        if profile_facebook:
+            lines.append(_build_kv_line(y, "Facebook", profile_facebook))
+            y += 20
+        if profile_instagram:
+            lines.append(_build_kv_line(y, "Instagram", profile_instagram))
             y += 20
         stats_y = y + 30
 
