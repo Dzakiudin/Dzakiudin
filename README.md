@@ -4,7 +4,6 @@
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/jakijekiiii)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ahmad-dzakiudin-30404b344/)
 
-## 📌 Summary
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg" />
@@ -13,7 +12,6 @@
   </picture>
 </p>
 
-## 🐍 Contributions
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake.svg" />
