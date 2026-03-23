@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="920" height="380" viewBox="0 0 920 380" role="img" aria-label="Dzakiudin README card">
-  <rect x="0" y="0" width="920" height="380" rx="18" fill="#ffffff"/>
-  <rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
-  <circle cx="44" cy="44" r="6" fill="#ff5f57"/>
-  <circle cx="64" cy="44" r="6" fill="#febc2e"/>
-  <circle cx="84" cy="44" r="6" fill="#28c840"/>
-  <text x="110" y="49" fill="#57606a" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace" font-size="12">Dzakiudin / README.md</text>
-  <text x="34" y="92" fill="#24292f" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace" font-size="14" xml:space="preserve">
-    <tspan x="34" dy="0">      __                        Dzakiudin / README.md</tspan>
-    <tspan x="34" dy="18"> (\,--------&apos;()&apos;--o              ----------------------------------------------------</tspan>
-    <tspan x="34" dy="18">  (_    ___    /~&quot;              Updated: ......................... 2026-03-23</tspan>
-    <tspan x="34" dy="18">   (_)_)  (_)_)</tspan>
-    <tspan x="34" dy="18">                                Focus: ........................... Software Engineering</tspan>
-    <tspan x="34" dy="18">   dzakiudin                    Editor: .......................... VS Code</tspan>
-    <tspan x="34" dy="18"></tspan>
-    <tspan x="34" dy="18">   github.com/                  GitHub Stats</tspan>
-    <tspan x="34" dy="18">   dzakiudin                    ----------------------------------------------------</tspan>
-    <tspan x="34" dy="18">                                Repos: ........................... 0</tspan>
-    <tspan x="34" dy="18">                                Stars: ........................... 0</tspan>
-    <tspan x="34" dy="18">                                Followers: ....................... 0</tspan>
-    <tspan x="34" dy="18">                                Following: ....................... 0</tspan>
-    <tspan x="34" dy="18">                                Commits (year): .................. 0</tspan>
-    <tspan x="34" dy="18">                                PRs (year): ...................... 0</tspan>
-    <tspan x="34" dy="18">                                Issues (year): ................... 0</tspan>
-    <tspan x="34" dy="18">                                Reviews (year): .................. 0</tspan>
-    <tspan x="34" dy="18">                                Contribs (yr): ................... 424</tspan>
-  </text>
-  <rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="none" stroke="#d0d7de"/>
-  <rect x="18.5" y="18.5" width="883" height="56" rx="14" fill="none" stroke="#d0d7de"/>
-  <rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="none" stroke="#0969da" opacity="0.18"/>
+<rect x="0" y="0" width="920" height="380" rx="18" fill="#ffffff"/>
+<rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="#f6f8fa" stroke="#d0d7de"/>
+<circle cx="44" cy="44" r="6" fill="#ff5f57"/>
+<circle cx="64" cy="44" r="6" fill="#febc2e"/>
+<circle cx="84" cy="44" r="6" fill="#28c840"/>
+<text x="110" y="49" fill="#57606a" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace" font-size="12">Dzakiudin / README.md</text>
+<text x="34" y="92" fill="#24292f" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace" font-size="14" xml:space="preserve">
+<tspan x="34" dy="0">      __                        Dzakiudin / README.md</tspan>
+<tspan x="34" dy="18"> (\,--------&apos;()&apos;--o             ----------------------------------------------------</tspan>
+<tspan x="34" dy="18">  (_    ___    /~&quot;              Updated: ......................... 2026-03-23</tspan>
+<tspan x="34" dy="18">   (_)_)  (_)_)                 Focus: ........................... Software Engineering</tspan>
+<tspan x="34" dy="18">                                Editor: .......................... VS Code</tspan>
+<tspan x="34" dy="18">   dzakiudin                    </tspan>
+<tspan x="34" dy="18">                                GitHub Stats</tspan>
+<tspan x="34" dy="18">   github.com/                  ----------------------------------------------------</tspan>
+<tspan x="34" dy="18">   dzakiudin                    Repos: ........................... 22</tspan>
+<tspan x="34" dy="18">                                Stars: ........................... 5</tspan>
+<tspan x="34" dy="18">                                Followers: ....................... 4</tspan>
+<tspan x="34" dy="18">                                Following: ....................... 3</tspan>
+<tspan x="34" dy="18">                                Commits (year): .................. 196</tspan>
+<tspan x="34" dy="18">                                PRs (year): ...................... 2</tspan>
+<tspan x="34" dy="18">                                Issues (year): ................... 0</tspan>
+<tspan x="34" dy="18">                                Reviews (year): .................. 0</tspan>
+<tspan x="34" dy="18">                                Contribs (yr): ................... 426</tspan>
+</text>
+<rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="none" stroke="#d0d7de"/>
+<rect x="18.5" y="18.5" width="883" height="56" rx="14" fill="none" stroke="#d0d7de"/>
+<rect x="18.5" y="18.5" width="883" height="343" rx="14" fill="none" stroke="#0969da" opacity="0.18"/>
 </svg>
