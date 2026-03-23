@@ -10,7 +10,7 @@
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Dzakiudin&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=true" alt="GitHub stats" />
   <br/>
-  <img src="https://nirzak-streak-stats.vercel.app/?user=Dzakiudin&theme=highcontrast&hide_border=false" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com/?user=Dzakiudin&theme=highcontrast&hide_border=false" alt="GitHub streak" />
   <br/>
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Dzakiudin&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=true&layout=compact" alt="Top languages" />
 </p>
