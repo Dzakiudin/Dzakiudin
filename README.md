@@ -7,9 +7,9 @@
 ## 📌 Summary
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-summary-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="profile-summary-light.svg" />
-    <img alt="Profile summary" src="profile-summary-light.svg" />
+    <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="light_mode.svg" />
+    <img alt="README card" src="light_mode.svg" />
   </picture>
 </p>
 

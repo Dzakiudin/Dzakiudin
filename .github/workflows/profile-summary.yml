@@ -1,4 +1,4 @@
-name: Update profile summary
+name: Update README card
 
 on:
   push:
@@ -26,4 +26,4 @@ jobs:
         run: python profile_summary.py
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update profile summary"
+          commit_message: "chore: update README card"

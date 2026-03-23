@@ -106,67 +106,126 @@ def _fetch_stats(token: str, login: str) -> dict:
     return base_stats
 
 
-def _render_svg(login: str, stats: dict, *, theme: str) -> str:
-    width = 760
-    height = 190
+def _escape_xml(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
+    )
+
+
+def _dot_line(key: str, value: str, *, value_col: int = 34) -> str:
+    left = f"{key}: "
+    dots = "." * max(1, value_col - len(left))
+    return f"{left}{dots} {value}"
+
+
+def _render_terminal_svg(login: str, stats: dict, *, theme: str) -> str:
+    width = 920
+    height = 380
 
     if theme == "dark":
         bg = "#0d1117"
+        panel = "#0b1220"
         border = "#30363d"
-        title = "#e6edf3"
-        label = "#9da7b1"
-        value = "#e6edf3"
+        text = "#e6edf3"
+        muted = "#9da7b1"
         accent = "#58a6ff"
     else:
         bg = "#ffffff"
+        panel = "#f6f8fa"
         border = "#d0d7de"
-        title = "#24292f"
-        label = "#57606a"
-        value = "#24292f"
+        text = "#24292f"
+        muted = "#57606a"
         accent = "#0969da"
 
-    title_text = f"{login} • Profile Summary"
+    now = dt.datetime.now(dt.timezone.utc).date().isoformat()
 
-    items = [
-        ("Public Repos", _format_int(stats["repos"])),
-        ("Stars Earned", _format_int(stats["stars"])),
-        ("Followers", _format_int(stats["followers"])),
-        ("Following", _format_int(stats["following"])),
-        ("Commits (last year)", _format_int(stats["commits_year"])),
-        ("PRs (last year)", _format_int(stats["prs_year"])),
-        ("Issues (last year)", _format_int(stats["issues_year"])),
-        ("Reviews (last year)", _format_int(stats["reviews_year"])),
-        ("Total Contributions", _format_int(stats["contribs_year"])),
+    left_lines = [
+        "      __",
+        " (\\,--------'()'--o",
+        "  (_    ___    /~\"",
+        "   (_)_)  (_)_)",
+        "",
+        "   dzakiudin",
+        "",
+        "   github.com/",
+        f"   {login.lower()}",
     ]
 
-    col_count = 3
-    row_count = 3
-    x0 = 32
-    y0 = 74
-    col_w = 232
-    row_h = 36
+    repos = _format_int(stats["repos"])
+    stars = _format_int(stats["stars"])
+    followers = _format_int(stats["followers"])
+    following = _format_int(stats["following"])
+    commits_year = _format_int(stats["commits_year"])
+    prs_year = _format_int(stats["prs_year"])
+    issues_year = _format_int(stats["issues_year"])
+    reviews_year = _format_int(stats["reviews_year"])
+    contribs_year = _format_int(stats["contribs_year"])
+
+    right_lines = [
+        f"{login} / README.md",
+        "-" * 52,
+        _dot_line("Updated", now),
+        _dot_line("Focus", "Software Engineering"),
+        _dot_line("Editor", "VS Code"),
+        "",
+        "GitHub Stats",
+        "-" * 52,
+        _dot_line("Repos", repos),
+        _dot_line("Stars", stars),
+        _dot_line("Followers", followers),
+        _dot_line("Following", following),
+        _dot_line("Commits (year)", commits_year),
+        _dot_line("PRs (year)", prs_year),
+        _dot_line("Issues (year)", issues_year),
+        _dot_line("Reviews (year)", reviews_year),
+        _dot_line("Contribs (yr)", contribs_year),
+    ]
+
+    left_width = 30
+    line_count = max(len(left_lines), len(right_lines))
+    combined = []
+    for i in range(line_count):
+        l = left_lines[i] if i < len(left_lines) else ""
+        r = right_lines[i] if i < len(right_lines) else ""
+        combined.append(l.ljust(left_width) + "  " + r)
+
+    font_family = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace"
+    font_size = 14
+    line_height = 18
+
+    x = 34
+    y = 92
 
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{title_text}">',
-        f'<rect x="0.5" y="0.5" width="{width-1}" height="{height-1}" rx="14" fill="{bg}" stroke="{border}"/>',
-        f'<text x="28" y="42" fill="{title}" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="20" font-weight="700">{title_text}</text>',
-        f'<rect x="28" y="54" width="64" height="4" rx="2" fill="{accent}"/>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{_escape_xml(login)} README card">',
+        f'<rect x="0" y="0" width="{width}" height="{height}" rx="18" fill="{bg}"/>',
+        f'<rect x="18.5" y="18.5" width="{width-37}" height="{height-37}" rx="14" fill="{panel}" stroke="{border}"/>',
+        f'<circle cx="44" cy="44" r="6" fill="#ff5f57"/>',
+        f'<circle cx="64" cy="44" r="6" fill="#febc2e"/>',
+        f'<circle cx="84" cy="44" r="6" fill="#28c840"/>',
+        f'<text x="110" y="49" fill="{muted}" font-family="{font_family}" font-size="12">{_escape_xml(login)} / README.md</text>',
+        f'<text x="{x}" y="{y}" fill="{text}" font-family="{font_family}" font-size="{font_size}" xml:space="preserve">',
     ]
 
-    for idx, (k, v) in enumerate(items[: col_count * row_count]):
-        col = idx % col_count
-        row = idx // col_count
-        x = x0 + col * col_w
-        y = y0 + row * row_h
-        lines.append(
-            f'<text x="{x}" y="{y}" fill="{label}" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="12">{k}</text>'
-        )
-        lines.append(
-            f'<text x="{x}" y="{y+18}" fill="{value}" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="16" font-weight="700">{v}</text>'
-        )
+    for idx, line in enumerate(combined):
+        dy = 0 if idx == 0 else line_height
+        lines.append(f'<tspan x="{x}" dy="{dy}">{_escape_xml(line)}</tspan>')
 
-    lines.append("</svg>")
+    lines.extend(
+        [
+            "</text>",
+            f'<rect x="18.5" y="18.5" width="{width-37}" height="{height-37}" rx="14" fill="none" stroke="{border}"/>',
+            f'<rect x="18.5" y="18.5" width="{width-37}" height="56" rx="14" fill="none" stroke="{border}"/>',
+            f'<rect x="18.5" y="18.5" width="{width-37}" height="{height-37}" rx="14" fill="none" stroke="{accent}" opacity="0.18"/>',
+            "</svg>",
+        ]
+    )
+
     return "\n".join(lines)
 
 
@@ -197,8 +256,8 @@ def main() -> int:
             "contribs_year": 0,
         }
 
-    _write_file("profile-summary-light.svg", _render_svg(login, stats, theme="light"))
-    _write_file("profile-summary-dark.svg", _render_svg(login, stats, theme="dark"))
+    _write_file("light_mode.svg", _render_terminal_svg(login, stats, theme="light"))
+    _write_file("dark_mode.svg", _render_terminal_svg(login, stats, theme="dark"))
     return 0
 
 
