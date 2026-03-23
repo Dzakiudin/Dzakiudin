@@ -326,13 +326,46 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
             ]
         )
 
+    def _build_kv_box(y: int, key_text: str, val_text: str, *, x_start: int, x_end: int, prefix: str) -> str:
+        prefix_text = f"{prefix}{key_text}: "
+        prefix_w = len(prefix_text) * char_w
+        dots_px = max(0.0, (x_end - x_start) - prefix_w - (char_w * 1.0))
+        dots_text = "." * 240
+
+        parts = [f'<text x="{x_start}" y="{y}" fill="{fg}">', f'<tspan class="cc">{_escape_xml(prefix)}</tspan>']
+        key_parts = _split_key(key_text)
+        for i, part in enumerate(key_parts):
+            parts.append(f'<tspan class="key">{_escape_xml(part)}</tspan>')
+            if i != len(key_parts) - 1:
+                parts.append('<tspan class="key">.</tspan>')
+        parts.append('<tspan class="cc">: </tspan>')
+        parts.append(
+            f'<tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="{dots_px:.1f}">{dots_text}</tspan>'
+        )
+        parts.append("</text>")
+
+        rect_pad = 10
+        value_w = len(val_text) * char_w
+        rect_w = value_w + rect_pad * 2
+        rect_x = max(float(x_start), float(x_end) - rect_w)
+        rect_y = y - font_size + 3
+        rect_h = font_size + 6
+
+        return "".join(
+            parts
+            + [
+                f'<rect x="{rect_x:.1f}" y="{rect_y}" width="{rect_w:.1f}" height="{rect_h}" fill="{bg}"/>',
+                f'<text x="{x_end}" y="{y}" class="value" text-anchor="end">{_escape_xml(val_text)}</text>',
+            ]
+        )
+
     has_contact = bool(profile_email or profile_discord or profile_linkedin)
     if has_contact:
         contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord))
         stats_y = 330 + (20 * contact_count) + 30
     else:
         stats_y = 310
-    max_y = max(420, stats_y + 100)
+    max_y = max(420, stats_y + 60)
     height_px = max(450, int(max_y + 30))
 
     lines = [
@@ -407,41 +440,31 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         stats_y = y + 30
 
     lines.append(_build_section_line(stats_y, "- GitHub Stats"))
-    lines.append(
-        f'<text x="{right_x}" y="{stats_y+20}" fill="{fg}">'
-        f'<tspan class="cc">. </tspan>'
-        f'<tspan class="key">Repos</tspan><tspan class="cc">: </tspan><tspan class="value">{repos}</tspan>'
-        f'<tspan class="cc"> {{Contributed: </tspan><tspan class="value">{contributed_repos_year}</tspan><tspan class="cc">}} | Stars: </tspan><tspan class="value">{stars}</tspan>'
-        f"</text>"
+    col_mid = int((right_x + right_edge) / 2)
+    gutter = 16
+    left_start = right_x
+    left_end = col_mid - gutter
+    right_start = col_mid + gutter
+    right_end = right_edge
+
+    def _stats_row(y: int, left_label: str, left_val: str, right_label: str, right_val: str) -> list[str]:
+        return [
+            _build_kv_box(y, left_label, left_val, x_start=left_start, x_end=left_end, prefix=". "),
+            f'<text x="{col_mid}" y="{y}" class="cc" text-anchor="middle">|</text>',
+            _build_kv_box(y, right_label, right_val, x_start=right_start, x_end=right_end, prefix=""),
+        ]
+
+    lines.extend(
+        _stats_row(
+            stats_y + 20,
+            "Repos",
+            f"{repos} {{Contributed: {contributed_repos_year}}}",
+            "Stars",
+            stars,
+        )
     )
-    lines.append(
-        f'<text x="{right_x}" y="{stats_y+40}" fill="{fg}">'
-        f'<tspan class="cc">. </tspan>'
-        f'<tspan class="key">Commits</tspan><tspan class="cc">: </tspan><tspan class="value">{commits_year}</tspan>'
-        f'<tspan class="cc"> | Followers: </tspan><tspan class="value">{followers}</tspan>'
-        f"</text>"
-    )
-    lines.append(
-        f'<text x="{right_x}" y="{stats_y+60}" fill="{fg}">'
-        f'<tspan class="cc">. </tspan>'
-        f'<tspan class="key">PRs</tspan><tspan class="cc">: </tspan><tspan class="value">{prs_year}</tspan>'
-        f'<tspan class="cc"> | Following: </tspan><tspan class="value">{following}</tspan>'
-        f"</text>"
-    )
-    lines.append(
-        f'<text x="{right_x}" y="{stats_y+80}" fill="{fg}">'
-        f'<tspan class="cc">. </tspan>'
-        f'<tspan class="key">Issues</tspan><tspan class="cc">: </tspan><tspan class="value">{issues_year}</tspan>'
-        f'<tspan class="cc"> | Reviews: </tspan><tspan class="value">{reviews_year}</tspan>'
-        f"</text>"
-    )
-    lines.append(
-        f'<text x="{right_x}" y="{stats_y+100}" fill="{fg}">'
-        f'<tspan class="cc">. </tspan>'
-        f'<tspan class="key">Lines of Code</tspan><tspan class="cc">: </tspan><tspan class="value">{loc}</tspan>'
-        f'<tspan class="cc"> | Contribs (yr): </tspan><tspan class="value">{contribs_year}</tspan>'
-        f"</text>"
-    )
+    lines.extend(_stats_row(stats_y + 40, "Commits", commits_year, "Followers", followers))
+    lines.extend(_stats_row(stats_y + 60, "Lines of Code", loc, "Contribs (yr)", contribs_year))
 
     lines.append("</svg>")
     return "\n".join(lines)
