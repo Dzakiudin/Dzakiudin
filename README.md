@@ -12,8 +12,6 @@
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Dzakiudin&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=true&layout=compact)
 
 ## 🐍 Contributions Snake
-https://github.com/Platane/snk
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Dzakiudin/Dzakiudin/output/github-snake.svg" />
@@ -21,7 +19,7 @@ https://github.com/Platane/snk
 </picture>
 
 ---
-[![](https://visitcount.itsvg.in/api?id=Dzakiudin&icon=0&color=0)](https://visitcount.itsvg.in)
+![](https://komarev.com/ghpvc/?username=Dzakiudin&style=for-the-badge)
 
 ## 💰 You can help me by Donating
 [![Saweria](https://img.shields.io/badge/Saweria-FF7A00?style=for-the-badge&logoColor=white)](https://saweria.co/jakijeki)
