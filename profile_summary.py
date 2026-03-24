@@ -288,17 +288,23 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
     right_edge = width_px - right_pad
 
     if theme == "dark":
-        bg = "#161b22"
+        bg = "none"
         fg = "#c9d1d9"
         key = "#ffa657"
         value = "#a5d6ff"
-        cc = "#616e7f"
-    else:
-        bg = "#ffffff"
+        cc = "#8b949e"
+    elif theme == "light":
+        bg = "none"
         fg = "#24292f"
         key = "#bc4c00"
         value = "#0969da"
         cc = "#57606a"
+    else:
+        bg = "none"
+        fg = "#c9d1d9"
+        key = "#ffa657"
+        value = "#a5d6ff"
+        cc = "#8b949e"
 
     now_dt = dt.datetime.now(dt.timezone.utc)
     created_at_raw = stats.get("created_at") or ""
@@ -494,7 +500,6 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
         f".ascii {{fill: {fg};}}",
         "text, tspan {white-space: pre;}",
         "</style>",
-        f'<rect width="{width_px}px" height="{height_px}px" fill="{bg}" rx="15"/>',
     ]
 
     if ascii_lines:
