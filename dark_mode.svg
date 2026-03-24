@@ -17,32 +17,52 @@
 text, tspan {white-space: pre;}
 </style>
 <rect width="985px" height="550px" fill="#161b22" rx="15"/>
-<text x="15" y="30" class="ascii" font-size="16px">
-<tspan x="15" y="30">                 ..     .</tspan>
-<tspan x="15" y="50"></tspan>
-<tspan x="15" y="70">             ^.  _rQmmmQ+</tspan>
-<tspan x="15" y="90">             &apos;  [k&amp;$$$$$d^</tspan>
-<tspan x="15" y="110">            . [nm$$@$$$$$I</tspan>
-<tspan x="15" y="130">            ^&quot;mJnXL&amp;pQ0p8&quot; &apos;</tspan>
-<tspan x="15" y="150">            :&lt;dl+-,MxI{t8I .</tspan>
-<tspan x="15" y="170">            ,?Lzkk_@BbhhW\:</tspan>
-<tspan x="15" y="190">            &apos;-rf$o&lt;Ok$$$Or~</tspan>
-<tspan x="15" y="210">             [{^hL?{Q%%@Mx&quot;</tspan>
-<tspan x="15" y="230">            .&quot;-~),[}YC$&amp;/,</tspan>
-<tspan x="15" y="250">              &quot;:&quot;]0m**Qpi</tspan>
-<tspan x="15" y="270">            ,.?  -/rn\-a\..</tspan>
-<tspan x="15" y="290">            ` xcI    In$X .</tspan>
-<tspan x="15" y="310">            ::~8w)lliaB@f .</tspan>
-<tspan x="15" y="330">     .     ;xn _&amp;$YYjm@B&gt;</tspan>
-<tspan x="15" y="350">          &quot;}+j  i&amp;Ut_&lt;&amp;k.</tspan>
-<tspan x="15" y="370"> &apos;       &quot;Ox[q!:.(@c[j@u .</tspan>
-<tspan x="15" y="390"> .     ..Q$x-*pk#XZO`&lt;h~</tspan>
-<tspan x="15" y="410">      . i@*bmkkrYt;{f;~&apos;</tspan>
-<tspan x="15" y="430">        t%h8$an^.^ .x!              ..</tspan>
-<tspan x="15" y="450">      ^[|tt1vv&gt;^  . &quot;^.             .`</tspan>
-<tspan x="15" y="470">      :w&gt;   &gt;`  ..                   &apos;</tspan>
-<tspan x="15" y="490">       J(`!x(                        &apos;</tspan>
-<tspan x="15" y="510">&apos;    . tm&lt;1OI.</tspan>
+<text x="15" y="30" class="ascii" font-size="8px">
+<tspan x="15" y="30"></tspan>
+<tspan x="15" y="41"></tspan>
+<tspan x="15" y="52">                                    ..          .</tspan>
+<tspan x="15" y="63">                                       &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</tspan>
+<tspan x="15" y="74">                           &lt;.      .-nQWWWWWWMWL~</tspan>
+<tspan x="15" y="85">                           l...  ICk8B@$$$$$$$$@8? .</tspan>
+<tspan x="15" y="96">                                &quot;*@$$@@@@@@@@@@@$k: .</tspan>
+<tspan x="15" y="107">                             +(  &amp;BBB@@$$$$$$@$@@$i</tspan>
+<tspan x="15" y="118">                            &quot;qb)h@$@BBB$BBBBB@B@$@i</tspan>
+<tspan x="15" y="129">                          : &lt;@@0Xko&amp;@$$$$$$$$%$$$@i  &apos;^</tspan>
+<tspan x="15" y="140">                         -)&apos;O$Zlif|&gt;_|q$Ov\/r-\k$$i  &quot;;</tspan>
+<tspan x="15" y="151">                         l,.@0: &gt;&gt;&lt;  &apos;q$r   lj]_%$i  ..</tspan>
+<tspan x="15" y="162">                        ._ +$| &lt;-fwL) 8$#z|}|J1c%Bl&apos;^</tspan>
+<tspan x="15" y="173">                         ~&lt;&gt;BvmaaW$&amp;i^WB$$&amp;WMMa&amp;@$[Q!</tspan>
+<tspan x="15" y="184">                        .i-i@|f$$$@X Z$$$$$$$$$$$*-#?</tspan>
+<tspan x="15" y="195">                         ``&quot;#&lt; OB%%d&apos;vOoYaBB@@BbB| J)</tspan>
+<tspan x="15" y="206">                           xq  ;a$$a  &apos;!~X@%@$$p%UXq_</tspan>
+<tspan x="15" y="217">                           h-~, maXt/|?(qW$$$$$%$80f&apos;</tspan>
+<tspan x="15" y="228">                           [ 0&gt;:k+`!uZCZaZc0hB@$ov,.</tspan>
+<tspan x="15" y="239">                             Y!,Q    ;li(cJ1p$$h!&quot;</tspan>
+<tspan x="15" y="250">                            ^~` l&quot;]vnxrnUbWq$B*fi .</tspan>
+<tspan x="15" y="261">                            I&quot;   &apos;\Z$$$$$$$$\?Jmp.</tspan>
+<tspan x="15" y="272">                            ~- .&apos; ^^{1\tvvc/ iw$b</tspan>
+<tspan x="15" y="283">                        Ii  [pl  .          laoBh;</tspan>
+<tspan x="15" y="294">                        &lt;&lt;. l&amp;w1&quot;  .&apos;&apos;&apos;&apos;  &apos;](p#@@} &apos;..</tspan>
+<tspan x="15" y="305">                        &apos;  . c$BL];     .:jMMq$$aI ...</tspan>
+<tspan x="15" y="316">                         ..  im$$&amp;Zt_I.&apos;&apos;n$$$$B$b</tspan>
+<tspan x="15" y="327">          &apos;            &apos;]JC_  ;X%$$$WJCC|Yh$@@@BX                .</tspan>
+<tspan x="15" y="338">      .   `           lcXaaL.. .x8%%Q\h*J]~z8@$$&quot;                .</tspan>
+<tspan x="15" y="349">   .. .               rC.`(}. .. x$&amp;f?l+-` &gt;p@$w`</tspan>
+<tspan x="15" y="360">                    .j1  &apos;hI . .. 0$8$X&gt;][~Ca@$- .</tspan>
+<tspan x="15" y="371">  .&apos;               ,|$c]&gt;t$\,     ^m$B$]_h)r$@&amp;&lt;                        .</tspan>
+<tspan x="15" y="382">  ^`              ,QB%$O+#$$0//\\/&gt;IM@8{&quot;|fi&amp;$Q</tspan>
+<tspan x="15" y="393">  &apos;              .n$@@Z. \*W@$$$$$Bx[%M&lt; .!;0$]</tspan>
+<tspan x="15" y="404">                 &lt;@B$$q)|)uLOzUhaWBQ rwr]^ ;(m</tspan>
+<tspan x="15" y="415">                 )B*#M8$$$8#bx`]!|c.  ^_Oc_  .&apos;                          .</tspan>
+<tspan x="15" y="426">                .C$hUJL%%b&amp;#h%~.   . .  Ybt&quot;.</tspan>
+<tspan x="15" y="437">               &apos;{%8$$$%@$Wo|][i+.&apos;.   ..&quot;c;.                             &apos;&quot;</tspan>
+<tspan x="15" y="448"> .           . rv~)JJf+JC*MMQ            &quot;^                              ^i</tspan>
+<tspan x="15" y="459"> `.         `-~a,        f``&apos;</tspan>
+<tspan x="15" y="470">            ;&lt;Jht:..... &quot;+                                                &apos;&apos;</tspan>
+<tspan x="15" y="481">              w@h!  &apos;~+.O, .                                              :,</tspan>
+<tspan x="15" y="492">         `    _w    lt!XB;</tspan>
+<tspan x="15" y="503">`^             Mp?.  `kB-                                                  .</tspan>
+<tspan x="15" y="514">..            `M$@J(ta0i                                                   .</tspan>
 </text>
 <text x="380" y="30" fill="#c9d1d9"><tspan>dzakiudin@github -  </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="399.0">————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</tspan></text>
 <text x="380" y="50" fill="#c9d1d9"><tspan class="cc">. </tspan><tspan class="key">OS</tspan><tspan class="cc">: </tspan><tspan class="cc" lengthAdjust="spacingAndGlyphs" textLength="523.8">................................................................................................................................................................................................................................................</tspan></text><rect x="701.4" y="37" width="269.6" height="22" fill="#161b22"/><text x="971" y="50" class="value" text-anchor="end">Windows 10, Android, Linux</text>
