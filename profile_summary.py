@@ -461,14 +461,26 @@ def _render_card_svg(login: str, stats: dict, *, theme: str) -> str:
 
     top_y = int(os.environ.get("PROFILE_TOP_Y") or "30")
     has_contact = bool(profile_email or profile_discord or profile_linkedin or profile_facebook or profile_instagram)
+    
+    # Calculate actual stats_y position based on contact section
     if has_contact:
-        contact_count = int(bool(profile_email)) + int(bool(profile_linkedin)) + int(bool(profile_discord)) + int(bool(profile_facebook)) + int(bool(profile_instagram))
-        stats_y = top_y + 330 + (20 * contact_count)
+        y = top_y + 300
+        if profile_email:
+            y += 20
+        if profile_linkedin:
+            y += 20
+        if profile_discord:
+            y += 20
+        if profile_facebook:
+            y += 20
+        if profile_instagram:
+            y += 20
+        stats_y = y + 30
     else:
         stats_y = top_y + 280
 
     right_bottom_y = stats_y + 60
-    bottom_pad = int(os.environ.get("PROFILE_BOTTOM_PAD") or "18")
+    bottom_pad = int(os.environ.get("PROFILE_BOTTOM_PAD") or "30")
     height_px = max(360, int(right_bottom_y + bottom_pad))
 
     ascii_font_size = int(os.environ.get("PROFILE_ASCII_FONT_SIZE") or "16")
