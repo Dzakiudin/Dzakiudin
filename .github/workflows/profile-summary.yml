@@ -28,6 +28,8 @@ jobs:
           PROFILE_IMAGE_FILE: saulgoodman.png
           PROFILE_IMAGE_URL: https://avatars.githubusercontent.com/${{ github.repository_owner }}?s=256
           PROFILE_LEFT_MODE: ascii
+          PROFILE_ASCII_FONT_SIZE: 8
+          PROFILE_ASCII_LINE_H: 11
           PROFILE_EMAIL: dzakiudin07@gmail.com
           PROFILE_LINKEDIN: Ahmad Dzakiudin
           PROFILE_DISCORD: jakijukijeki
