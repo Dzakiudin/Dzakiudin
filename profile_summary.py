@@ -48,11 +48,8 @@ def _fetch_stats(token: str, login: str) -> dict:
               totalIssueContributions
               totalPullRequestContributions
               totalPullRequestReviewContributions
+              totalRepositoriesWithContributedCommits
               contributionCalendar { totalContributions }
-              repositoryContributionsByRepository(maxRepositories: 100) {
-                repository { nameWithOwner }
-                contributions { totalCount }
-              }
             }
             repositories(ownerAffiliations: OWNER, isFork: false, first: 100, after: $after) {
               totalCount
@@ -89,7 +86,7 @@ def _fetch_stats(token: str, login: str) -> dict:
         if base_stats is None:
             repos_total_count = repos["totalCount"]
             cc = user["contributionsCollection"]
-            contributed_repos = len(cc.get("repositoryContributionsByRepository") or [])
+            contributed_repos = cc.get("totalRepositoriesWithContributedCommits", 0)
             base_stats = {
                 "created_at": user["createdAt"],
                 "followers": user["followers"]["totalCount"],
