@@ -602,11 +602,18 @@ def main() -> int:
     login = os.environ.get("GITHUB_REPOSITORY_OWNER") or os.environ.get("GITHUB_ACTOR") or "Dzakiudin"
     token = os.environ.get("GITHUB_TOKEN") or ""
 
+    print(f"[INFO] Login: {login}")
+    print(f"[INFO] Token present: {bool(token)}")
+    print(f"[INFO] Token length: {len(token)}")
+    print(f"[INFO] Token prefix: {token[:4]}..." if len(token) > 4 else "[INFO] Token too short")
+
     try:
         if not token:
             raise RuntimeError("Missing GITHUB_TOKEN")
         stats = _fetch_stats(token, login)
-    except (RuntimeError, urllib.error.URLError, urllib.error.HTTPError):
+        print(f"[SUCCESS] Stats fetched: repos={stats.get('repos')}, stars={stats.get('stars')}, followers={stats.get('followers')}, commits_year={stats.get('commits_year')}")
+    except (RuntimeError, urllib.error.URLError, urllib.error.HTTPError) as e:
+        print(f"[ERROR] Failed to fetch stats: {type(e).__name__}: {e}")
         stats = {
             "created_at": "",
             "repos": 0,
